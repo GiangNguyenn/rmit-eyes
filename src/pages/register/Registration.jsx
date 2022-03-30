@@ -5,6 +5,7 @@ import logo from "../../media/general/logo.png";
 import rmitLogo from "../../media/general/rmit.png";
 import emblem1 from "../../media/general/emblem1.png";
 import emblem2 from "../../media/general/emblem2.png";
+import TextField from "@material-ui/core/TextField";
 
 import {
   FormControl,
@@ -20,10 +21,25 @@ import { DropzoneArea } from "material-ui-dropzone";
 
 import CloseIcon from "@material-ui/icons/Close";
 
+const genders = [
+  {
+    value: "male",
+    label: "male",
+  },
+  {
+    value: "female",
+    label: "female",
+  },
+  {
+    value: "others",
+    label: "others",
+  },
+];
 class Registration extends Component {
   state = {
     email: "",
     name: "",
+    sid: "",
   };
 
   errorClose = (e) => {
@@ -103,7 +119,7 @@ class Registration extends Component {
             className={classes.form}
             onSubmit={() => this.submitRegistration}
           >
-            <Grid container>
+            {/* <Grid container>
               <Grid item xs={6}>
                 <FormControl required fullWidth margin="normal">
                   <InputLabel htmlFor="email" className={classes.labels}>
@@ -165,6 +181,104 @@ class Registration extends Component {
                     />
                   </FormControl>
                 </Grid>
+              </Grid>
+            </Grid> */}
+
+            <Grid container spacing={4}>
+              <Grid item xs={6}>
+                {/* <FormControl required fullWidth margin="normal">
+                  <InputLabel htmlFor="email" className={classes.labels}>
+                    e-mail
+                  </InputLabel>
+                  <Input
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    className={classes.inputs}
+                    disableUnderline={true}
+                    onChange={this.handleChange("email")}
+                  />
+                </FormControl>
+                
+                  {/* <FormControl required fullWidth margin="normal">
+                    <InputLabel htmlFor="name" className={classes.labels}>
+                      Name
+                    </InputLabel>
+                    <Input
+                      name="name"
+                      autoComplete="name"
+                      className={classes.inputs}
+                      disableUnderline={true}
+                      onChange={this.handleChange("name")}
+                      type="input"
+                    />
+                  </FormControl> */}
+                <Grid xs={12}>
+                  <TextField
+                    label="email"
+                    type="email"
+                    margin="normal"
+                    variant="outlined"
+                    fullWidth
+                    name="email"
+                    autoComplete="email"
+                    disableUnderline={true}
+                    onChange={this.handleChange("email")}
+                    helperText="Please provide your email"
+                    // className={classes.inputs}
+                    // type="input"
+                  />
+                </Grid>
+                <Grid xs={12}>
+                  <TextField
+                    label="name"
+                    type="name"
+                    margin="normal"
+                    variant="outlined"
+                    fullWidth
+                    name="name"
+                    autoComplete="name"
+                    disableUnderline={true}
+                    onChange={this.handleChange("name")}
+                    helperText="Please provide your name"
+                    // className={classes.inputs}
+                    // type="input"
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    label="sid"
+                    type="id"
+                    margin="normal"
+                    variant="outlined"
+                    fullWidth
+                    helperText="Please provide your ID"
+                  />
+                </Grid>
+              
+                <Grid>
+                  <TextField
+                    id="select-gender"
+                    select
+                    label="Select"
+                    helperText="Please select your gender"
+                  />
+                </Grid>
+              </Grid>
+
+              <Grid item xs={6}>
+                <FormControl required fullWidth margin="normal">
+                  <DropzoneArea
+                    onChange={(files) => console.log("Files:", files)}
+                    Icon={PublishIcon}
+                  />
+                </FormControl>
+                <FormControl required fullWidth margin="normal">
+                  <DropzoneArea
+                    onChange={(files) => console.log("Files:", files)}
+                    Icon={PublishIcon}
+                  />
+                </FormControl>
               </Grid>
             </Grid>
 

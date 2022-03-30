@@ -26,15 +26,18 @@ export const register = (theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    width: "800px",
+    width: "1400px",
     height: "auto",
     position: "relative",
-    left: "20px",
+    left: "-500px",
     justifyContent: "center",
     boxShadow: ".2px 12px 18px rgba(131,153,167,0.6)",
     "&:hover": {
       boxShadow: "0px 24px 36px rgba(131,153,167,0.99)",
     },
+    
+      // background: "rgba(169,198,217,0.36457423) ",
+    
   },
 
   icon: {
@@ -66,9 +69,10 @@ export const register = (theme) => ({
     fontSize: "14px",
     padding: `${theme.spacing(1.5)}px ${theme.spacing(1)}px`,
     borderRadius: "8px",
-    border: "1.4px solid",
+    border: "2px solid",
+    
     boxShadow: "1px 2px 20px rgba(169,198,217,0.29457423) ",
-    borderColor: borderLight,
+    borderColor: "#141414",
 
     "&:hover": {
       background: "rgba(169,198,217,0.36457423) ",
@@ -80,6 +84,7 @@ export const register = (theme) => ({
     background: "#E60028",
     position: "relative",
     fontWeight: 400,
+    width: "1200px",
     fontFamily: "Raleway, sans-serif",
     overflow: "hidden",
     marginTop: theme.spacing(6),
