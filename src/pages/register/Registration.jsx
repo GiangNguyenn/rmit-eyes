@@ -60,6 +60,8 @@ class Registration extends Component {
     }
     return true;
   };
+
+  
   submitRegistration = (e) => {
     e.preventDefault();
   };
@@ -184,7 +186,7 @@ class Registration extends Component {
               </Grid>
             </Grid> */}
 
-            <Grid container spacing={4}>
+            <Grid container spacing={7}>
               <Grid item xs={6}>
                 {/* <FormControl required fullWidth margin="normal">
                   <InputLabel htmlFor="email" className={classes.labels}>
@@ -264,21 +266,33 @@ class Registration extends Component {
                     helperText="Please select your gender"
                   />
                 </Grid>
+                <Grid>
+                <FormControl required fullWidth margin="normal">
+                  <DropzoneArea
+                  dropzoneText={"Upload vaccination proofs"}
+                    onChange={(files) => console.log("Files:", files)}
+                    Icon={PublishIcon}
+                  />
+                </FormControl>
+                </Grid>
               </Grid>
 
               <Grid item xs={6}>
                 <FormControl required fullWidth margin="normal">
                   <DropzoneArea
+                  dropzoneText={"Upload an image of your face with no mask"}
                     onChange={(files) => console.log("Files:", files)}
                     Icon={PublishIcon}
                   />
                 </FormControl>
                 <FormControl required fullWidth margin="normal">
                   <DropzoneArea
+                  dropzoneText={"Upload an image of your face with a mask"}
                     onChange={(files) => console.log("Files:", files)}
                     Icon={PublishIcon}
                   />
                 </FormControl>
+                
               </Grid>
             </Grid>
 
