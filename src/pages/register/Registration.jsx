@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { register } from './style/RegistrationStyles';
 import RegisterForm from '../../components/RegisterForm';
-import logo from '../..//general/logo.png';
+import logo from '../../asset/general/logo.png';
 import rmitLogo from '../../asset/general/rmit.png';
 import emblem1 from '../../asset/general/emblem1.png';
 import emblem2 from '../../asset/general/emblem2.png';
