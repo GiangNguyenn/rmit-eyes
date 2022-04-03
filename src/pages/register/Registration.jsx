@@ -3,9 +3,9 @@ import { withStyles } from '@material-ui/core/styles';
 import { register } from './style/RegistrationStyles';
 import RegisterForm from '../../components/RegisterForm';
 import logo from '../../media/general/logo.png';
-import rmitLogo from '../../media/general/rmit.png';
-import emblem1 from '../../media/general/emblem1.png';
-import emblem2 from '../../media/general/emblem2.png';
+import rmitLogo from '../../asset/general/rmit.png';
+import emblem1 from '../../asset/general/emblem1.png';
+import emblem2 from '../../asset/general/emblem2.png';
 
 import { FormControl, Input, InputLabel, Button, Grid, Container } from '@material-ui/core';
 import FaceIcon from '@material-ui/icons/Face';
