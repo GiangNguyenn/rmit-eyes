@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Registration from './pages/register/Registration';
 import Login from './pages/login/Login';
+import AdminDashBoard from "./components/AdminDashBoardComponent";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Registration />} />
+          <Route path='/dashboard/admin/:id' element={<AdminDashBoard/>}/>
         </Routes>
       </Router>
     </div>
