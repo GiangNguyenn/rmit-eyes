@@ -5,7 +5,7 @@ import logo from '../../asset/general/logo.png';
 import rmitLogo from '../../asset/general/rmit.png';
 import emblem1 from '../../asset/general/emblem1.png';
 import emblem2 from '../../asset/general/emblem2.png';
-import AdminDashBoardComponent from "../../components/AdminDashBoardComponent";
+import AdminDashBoardComponent from '../../components/AdminDashBoardComponent';
 
 class AdminDashBoard extends Component {
   render() {

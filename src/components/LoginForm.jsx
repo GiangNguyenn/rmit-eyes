@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Container, TextField, Button, Box } from '@material-ui/core';
-import axios from "../http-common";
-import {storeUserSession} from "../helpers/userHelper";
-import {Router} from "react-router-dom";
-import {useNavigate} from 'react-router-dom'
+import axios from '../http-common';
+import { storeUserSession } from '../helpers/userHelper';
+import { Router } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await axios.post('/auth/login', {username, password})
-    if (result){
-      console.log('go here')
+    const result = await axios.post('/auth/login', { username, password });
+    if (result) {
+      console.log('go here');
       storeUserSession(result.data.user_id);
-      navigate("/dashboard/admin/"+ result.data.user_id, { replace: true});
+      navigate('/dashboard/admin/' + result.data.user_id, { replace: true });
     }
-  }
+  };
 
   return (
     <Container maxWidth="xs">
@@ -29,7 +29,7 @@ function LoginForm() {
             autoComplete="username"
             value={username}
             autoFocus
-            onChange={e => setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </Box>
         <Box mb={2}>
@@ -39,12 +39,18 @@ function LoginForm() {
             fullWidth
             autoComplete="password"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             autoFocus
           />
         </Box>
 
-        <Button variant="contained" type="submit" onClick={e => handleSubmit(e)} fullWidth color="primary">
+        <Button
+          variant="contained"
+          type="submit"
+          onClick={(e) => handleSubmit(e)}
+          fullWidth
+          color="primary"
+        >
           Log in
         </Button>
       </form>

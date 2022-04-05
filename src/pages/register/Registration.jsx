@@ -7,7 +7,6 @@ import rmitLogo from '../../asset/general/rmit.png';
 import emblem1 from '../../asset/general/emblem1.png';
 import emblem2 from '../../asset/general/emblem2.png';
 
-
 import CloseIcon from '@material-ui/icons/Close';
 
 class Registration extends Component {
