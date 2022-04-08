@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navigation from './components/Navigation';
-
+import WithNav from './components/navigation/WithNav';
+import WithoutNav from './components/navigation/WithoutNav';
 import Registration from './pages/register/Registration';
 import Login from './pages/login/Login';
 import AdminDashBoard from './components/AdminDashBoardComponent';
@@ -12,11 +12,14 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Registration />} />
-        <Route path="/dashboard/admin/:id" element={<AdminDashBoard />} />
-        <Route path="/user_list" element={<UserList />} />
-        <Route path="/user_request" element={<UserRequest />} />
+        <Route element={<WithoutNav />}>
+          <Route path="/" element={<Login />} />
+        </Route>
+        <Route element={<WithNav />}>
+          <Route path="/dashboard/admin/:id" element={<AdminDashBoard />} />
+          <Route path="/user_request" element={<UserRequest />} />
+          <Route path="/user_list" element={<UserList />} />
+        </Route>
       </Routes>
     </div>
   );

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Container, TextField, Button, Box } from '@material-ui/core';
 import axios from '../http-common';
 import { useParams } from 'react-router-dom';
-import Navigation from './Navigation';
 
 function AdminDashBoardComponent() {
   const params = useParams();
@@ -22,7 +21,6 @@ function AdminDashBoardComponent() {
   });
   return (
     <Container maxWidth="xs">
-      <Navigation />
       <div> Welcome To Admin Dashboard</div>
       <p> userid: </p>
       <p> validated: </p>
