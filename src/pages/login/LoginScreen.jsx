@@ -91,7 +91,7 @@ class Login extends Component {
             }}
           >
             <img src={logo} alt="" className={classes.icon} />
-            <h1 style={{ color: '#020052' }}>Register</h1>
+            <h1 style={{ color: '#020052' }}>login</h1>
           </div>
         </div>
         <div className={classes.paper}>

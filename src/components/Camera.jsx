@@ -26,7 +26,9 @@ class Camera extends Component {
 
   componentWillMount = async () => {
     await loadModels();
-    this.setState({ faceMatcher: await createMatcher(JSON_PROFILE) });
+    if (this.props.users) {
+      this.setState({faceMatcher: await createMatcher(this.props.users)});
+    }
     this.setInputDevice();
   };
 
@@ -77,6 +79,7 @@ class Camera extends Component {
         let match = await this.state.descriptors.map(descriptor =>
           this.state.faceMatcher.findBestMatch(descriptor)
         );
+        if (match && match.length) this.props.findDetectedUser(match)
         this.setState({ match });
       }
     }

@@ -30,23 +30,22 @@ export async function getFullFaceDescription(blob, inputSize = 512) {
 }
 
 const maxDescriptorDistance = 0.5;
-export async function createMatcher(faceProfile) {
-  // Create labeled descriptors of member from profile
-  let members = Object.keys(faceProfile);
-  let labeledDescriptors = members.map(
-    member =>
-      new faceapi.LabeledFaceDescriptors(
-        faceProfile[member].name + ' - ' + faceProfile[member].status +  ' 2 doses',
-        faceProfile[member].descriptors.map(
-          descriptor => new Float32Array(descriptor)
-        )
-      )
-  );
-  console.log('labled descriptors', labeledDescriptors)
 
-  // Create face matcher (maximum descriptor distance is 0.5)
+export async function createMatcher(faceProfile) {
+  console.log('go 1', faceProfile)
+  if (!faceProfile.length) return;
+  const labeledDescription = faceProfile.filter(profile => profile.image_descriptor &&
+    profile.image_with_mask_descriptor).map(profile => {
+    if (profile.image_descriptor && profile.image_with_mask_descriptor) {
+      return new faceapi.LabeledFaceDescriptors(
+        profile.student_name + ' ' + profile.sid + ' ' + profile.status,
+        [Float32Array.from(profile.image_descriptor.split(',')), Float32Array.from(profile.image_descriptor.split(','))]
+      )
+    }
+
+  })
   let faceMatcher = new faceapi.FaceMatcher(
-    labeledDescriptors,
+    labeledDescription,
     maxDescriptorDistance
   );
   return faceMatcher;
