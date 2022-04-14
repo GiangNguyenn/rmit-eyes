@@ -12,7 +12,7 @@ function LoginForm() {
     e.preventDefault();
     const result = await axios.post('/auth/login', { username, password });
     if (result) {
-      console.log('go here');
+      console.log('go here ', result.data);
       storeUserSession(result.data.user_id);
       navigate('/dashboard/admin/' + result.data.user_id, { replace: true });
     }
