@@ -15,6 +15,7 @@ function App() {
       <Routes>
         <Route element={<WithoutNav />}>
           <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Registration />} />
         </Route>
         <Route element={<WithNav />}>
           <Route path="/dashboard/admin/:id" element={<AdminDashBoard />} />

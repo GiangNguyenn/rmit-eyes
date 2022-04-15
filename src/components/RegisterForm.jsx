@@ -70,13 +70,12 @@ const RegisterForm = () => {
       const desc = await faceApi.getFullFaceDescription(uri)
       if (desc.length === 0) {
         alert('Wrong Image Uploaded! Please Upload your real image.')
-        e.target.files = []
         return;
       }
       const descriptionString = desc[0].descriptor.toString()
       //TODO: important
-      // const labeled = new face.LabeledFaceDescriptors(name + ' - waiting for approve', [desc[0].descriptor])
       // Validate Images here in the future
+      // check existing uploaded image
       if (e.target.name === 'image') {
         setImageDescriptor(descriptionString)
       } else setImageWithMaskDescriptor(descriptionString)
@@ -103,7 +102,7 @@ const RegisterForm = () => {
     await loadModels()
   }, [])
 
-  const isValidInput = () => image && imageWithMask && vaccineDocument;
+  const isValidInput = () => image && imageWithMask && vaccineDocument && imageDescriptor && imageWithMaskDescriptor;
   return (
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
       <Form.Item
