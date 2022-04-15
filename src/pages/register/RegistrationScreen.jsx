@@ -97,7 +97,7 @@ class Registration extends Component {
           </div>
         </div>
         <div className={classes.paper}>
-          <RegisterForm />
+        <RegisterForm />
         </div>
       </div>
     );

@@ -14,6 +14,7 @@ function App() {
     <div>
       <Routes>
         <Route element={<WithoutNav />}>
+        <Route path="/registration" element={<Registration />} />
           <Route path="/" element={<Login />} />
         </Route>
         <Route element={<WithNav />}>

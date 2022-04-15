@@ -82,14 +82,8 @@ export const register = (theme) => ({
     background: '#E60028',
     position: 'relative',
     fontWeight: 400,
-<<<<<<< HEAD
-    width: "1200px",
-    fontFamily: "Raleway, sans-serif",
-    overflow: "hidden",
-=======
     fontFamily: 'Raleway, sans-serif',
     overflow: 'hidden',
->>>>>>> main
     marginTop: theme.spacing(6),
     padding: `${theme.spacing(1.6)}px`,
     border: 'none',
