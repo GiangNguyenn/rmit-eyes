@@ -16,12 +16,12 @@ export const routes = [
   },
   {
     route: '/user_list',
-    name: "User List",
+    name: 'User List',
     icon: <PersonSearchIcon />,
   },
   {
     route: '/statistics',
-    name: "Statistics",
+    name: 'Statistics',
     icon: <InsightsIcon />,
-  }
+  },
 ];

@@ -4,9 +4,9 @@ import WithNav from './components/navigation/WithNav';
 import WithoutNav from './components/navigation/WithoutNav';
 import Registration from './pages/register/RegistrationScreen';
 import Login from './pages/login/LoginScreen';
-import AdminDashBoard from './components/AdminDashBoardComponent';
-import UserList from './pages/user_list/UserList';
-import UserRequest from './pages/user_request/UserRequest';
+import HomeScreen from './pages/home/HomeScreen';
+import UserList from './pages/user_list/UserListScreen';
+import UserRequest from './pages/user_request/UserRequestScreen';
 import StatisticsScreen from './pages/statistics/StatisticsScreen';
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
           <Route path="/registration" element={<Registration />} />
         </Route>
         <Route element={<WithNav />}>
-          <Route path="/dashboard/admin/:id" element={<AdminDashBoard />} />
+          <Route path="/dashboard/admin/:id" element={<HomeScreen />} />
           <Route path="/user_request" element={<UserRequest />} />
           <Route path="/user_list" element={<UserList />} />
           <Route path="/statistics" element={<StatisticsScreen />} />

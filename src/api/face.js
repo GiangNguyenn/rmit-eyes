@@ -13,7 +13,7 @@ export async function getFullFaceDescription(blob, inputSize = 512) {
   let scoreThreshold = 0.7;
   const OPTION = new faceapi.TinyFaceDetectorOptions({
     inputSize,
-    scoreThreshold
+    scoreThreshold,
   });
   const useTinyModel = true;
 
@@ -32,21 +32,21 @@ export async function getFullFaceDescription(blob, inputSize = 512) {
 const maxDescriptorDistance = 0.5;
 
 export async function createMatcher(faceProfile) {
-  console.log('go 1', faceProfile)
+  console.log('go 1', faceProfile);
   if (!faceProfile.length) return;
-  const labeledDescription = faceProfile.filter(profile => profile.image_descriptor &&
-    profile.image_with_mask_descriptor).map(profile => {
-    if (profile.image_descriptor && profile.image_with_mask_descriptor) {
-      return new faceapi.LabeledFaceDescriptors(
-        profile.student_name + ' ' + profile.sid + ' ' + profile.status,
-        [Float32Array.from(profile.image_descriptor.split(',')), Float32Array.from(profile.image_descriptor.split(','))]
-      )
-    }
-
-  })
-  let faceMatcher = new faceapi.FaceMatcher(
-    labeledDescription,
-    maxDescriptorDistance
-  );
+  const labeledDescription = faceProfile
+    .filter((profile) => profile.image_descriptor && profile.image_with_mask_descriptor)
+    .map((profile) => {
+      if (profile.image_descriptor && profile.image_with_mask_descriptor) {
+        return new faceapi.LabeledFaceDescriptors(
+          profile.student_name + ' ' + profile.sid + ' ' + profile.status,
+          [
+            Float32Array.from(profile.image_descriptor.split(',')),
+            Float32Array.from(profile.image_descriptor.split(',')),
+          ],
+        );
+      }
+    });
+  let faceMatcher = new faceapi.FaceMatcher(labeledDescription, maxDescriptorDistance);
   return faceMatcher;
 }
