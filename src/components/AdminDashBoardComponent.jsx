@@ -3,49 +3,46 @@ import { Container, TextField, Button, Box } from '@material-ui/core';
 import axios from '../http-common';
 import { useParams } from 'react-router-dom';
 import Camera from './Camera';
+import {getUserLogged} from "../helpers/userHelper";
+import UserDetail from "./detail/UserDetail";
+import UserDescriptionDetail from "./detail/UserDescriptionDetail";
 
 function AdminDashBoardComponent() {
-  const params = useParams();
+  const id = getUserLogged();
+  console.log('id', id)
   const [user, setUser] = useState({});
   const [userList, setUserList] = useState([]);
   const [detectedUser, setDetectedUser] = useState({});
   useEffect(async () => {
-    const user = await axios.get('users/findUser', {
-      params: {
-        user_id: params.id,
-      },
-    });
-    const userList = await axios.get('users/');
-    if (user) {
-      console.log('user', user);
-      setUser(user.data);
+    if (id) {
+      const user = await axios.get('users/findUser', {
+        params: {
+          user_id: id,
+        },
+      });
+      if (user) {
+        console.log('user', user);
+        setUser(user.data);
+      }
     }
+    const userList = await axios.get('users/');
     if (userList) {
       setUserList(userList.data);
     }
-  }, [params]);
+  }, [id]);
   const findDetectedUser = (match) => {
     if (match && match.length) {
-      console.log('match', match);
       const sid = match[0]._label.split(' ')[1];
       setDetectedUser(userList.find((user) => user.sid === sid));
     }
   };
-  let us = null;
-  if (detectedUser && Object.keys(detectedUser).length) {
-    us = Object.keys(detectedUser).map((prop) => (
-      <h2>
-        {prop}: {detectedUser[prop]}
-      </h2>
-    ));
-  }
   return (
     userList && (
-      <Container maxWidth="xs">
-        <div> Welcome To Admin Dashboard</div>
+        <div style={{display: "inline-flex", flexDirection: 'row', width: '100%', justifyContent:'space-around'}}>
         <Camera users={userList} findDetectedUser={findDetectedUser} />
-        {us}
-      </Container>
+          {/*<div> Bee vo </div>*/}
+          {detectedUser ? <UserDescriptionDetail user={detectedUser}/>: <div style={{width:'400px'}}> </div> }
+        </div>
     )
   );
 }

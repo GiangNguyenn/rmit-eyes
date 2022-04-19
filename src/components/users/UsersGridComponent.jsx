@@ -1,10 +1,10 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import { Theme, createStyles, makeStyles  } from '@material-ui/core/styles';
 import MaterialTable from 'material-table';
 import Chip from '@mui/material/Chip';
 import axios from '../../http-common';
-
+import {Button} from "@mui/material";
 import {
   Search,
   XSquare,
@@ -15,6 +15,7 @@ import {
   Trash2,
   Edit,
 } from 'react-feather';
+import UserDetailModal from "../modal/UserDetailModal";
 
 const today = new Date();
 const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -73,19 +74,21 @@ const UserGridComponent = (props) => {
   const params = useParams();
   const [users, setUsers] = useState([]);
   useEffect(async () => {
-    const response = await axios.get('users');
+    const response = await axios.get('users', {params: {
+      status: props.approve ?  'pending_to_approve' : '-pending_to_approve'
+      }});
     response && setUsers(response.data);
   }, [params]);
 
   const STATUS = {
     pending_to_approve: <Chip size="small" label="PENDING" color="primary" />,
-    // 2: <Chip size="small" label="DRAFT" color="secondary" />,
-    // 3: <Chip size="small" label="COMPLETE" style={{ backgroundColor: '#93da49' }} />,
-    // 4: <Chip size="small" label="SCHEDULED" color="secondary" />,
   };
 
   const classes = useStyles();
-
+  const handleApprove = (sid) => {
+    setUsers(users.filter(user => user.sid !== sid))
+    axios.put('/users/user/approve', {sid: sid, status: 'approved'}).then(res => console.log(res))
+  }
   return (
     <div className={classes.listContainer}>
       <MaterialTable
@@ -107,6 +110,18 @@ const UserGridComponent = (props) => {
             field: 'status',
             render: (rowData) => <>{STATUS[rowData.status]}</>,
           },
+          {
+            title: 'Approve',
+            field: '',
+            render: (rowData) => <UserDetailModal user={rowData}/>
+            ,
+          },
+          props.approve ? {
+            title: 'Details',
+            field: '',
+            render: (rowData) => <Button variant="contained" color="success" onClick={() => handleApprove(rowData.sid)}>Approve</Button>
+            ,
+          } : {}
         ]}
         actions={[
           {
@@ -132,7 +147,6 @@ const UserGridComponent = (props) => {
             onClick: (evt, data) => alert('You want to delete a row'),
           },
         ]}
-        onRowClick={(e, rowData) => console.log('rowData', rowData.student_name)}
         icons={tableIcons}
         options={options}
         title="Validated Users"

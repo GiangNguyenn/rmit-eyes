@@ -4,7 +4,7 @@ import UsersGridComponent from '../../components/users/UsersGridComponent';
 export default function UserRequestScreen() {
   return (
     <div>
-      <UsersGridComponent />
+      <UsersGridComponent approve={true}/>
     </div>
   );
 }

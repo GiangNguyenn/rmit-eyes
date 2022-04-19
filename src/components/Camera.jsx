@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Webcam from 'react-webcam';
 import { loadModels, getFullFaceDescription, createMatcher } from '../api/face';
+import axios from "../http-common";
 
 // Import face profile
 const JSON_PROFILE = require('../descriptors/bnk48.json');
 
-const WIDTH = 420;
-const HEIGHT = 420;
+const WIDTH = 800;
+const HEIGHT = 800;
 const inputSize = 160;
 
 class Camera extends Component {
@@ -21,20 +22,27 @@ class Camera extends Component {
       faceMatcher: null,
       match: null,
       facingMode: null,
+      users: null
     };
   }
 
   componentWillMount = async () => {
     await loadModels();
-    if (this.props.users) {
+    if (this.props.users.length) {
       this.setState({ faceMatcher: await createMatcher(this.props.users) });
+    }
+    else {
+      const userList = await axios.get('users/');
+      if (userList) {
+        this.setState({users: userList.data});
+      }
+      this.setState({ faceMatcher: await createMatcher(this.state.users) });
     }
     this.setInputDevice();
   };
 
   setInputDevice = () => {
     navigator.mediaDevices.enumerateDevices().then(async (devices) => {
-      console.log('devices', devices);
       let inputDevice = await devices.filter((device) => device.kind === 'Camera');
       if (inputDevice.length < 2) {
         await this.setState({
@@ -58,9 +66,12 @@ class Camera extends Component {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
+  componentDidMount() {
+    console.log('this proos users', this.props.users)
+  }
 
   capture = async () => {
-    if (!!this.webcam.current) {
+    if (!!this.webcam.current && this.webcam.current.getScreenshot()) {
       await getFullFaceDescription(this.webcam.current.getScreenshot(), inputSize).then(
         (fullDesc) => {
           if (!!fullDesc) {
@@ -71,7 +82,6 @@ class Camera extends Component {
           }
         },
       );
-
       if (!!this.state.descriptors && !!this.state.faceMatcher) {
         let match = await this.state.descriptors.map((descriptor) =>
           this.state.faceMatcher.findBestMatch(descriptor),
@@ -84,6 +94,7 @@ class Camera extends Component {
 
   render() {
     const { detections, match, facingMode } = this.state;
+
     let videoConstraints = null;
     let camera = '';
     if (!!facingMode) {
