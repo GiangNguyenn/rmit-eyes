@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
 
-  navbar: { backgroundColor: '#F6F6F6'},
+  navbar: { backgroundColor: '#F6F6F6' },
 }));
 
 const NavBar = () => {

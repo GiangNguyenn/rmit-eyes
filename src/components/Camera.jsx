@@ -20,31 +20,29 @@ class Camera extends Component {
       descriptors: null,
       faceMatcher: null,
       match: null,
-      facingMode: null
+      facingMode: null,
     };
   }
 
   componentWillMount = async () => {
     await loadModels();
     if (this.props.users) {
-      this.setState({faceMatcher: await createMatcher(this.props.users)});
+      this.setState({ faceMatcher: await createMatcher(this.props.users) });
     }
     this.setInputDevice();
   };
 
   setInputDevice = () => {
-    navigator.mediaDevices.enumerateDevices().then(async devices => {
-      console.log('devices', devices)
-      let inputDevice = await devices.filter(
-        device => device.kind === 'Camera'
-      );
+    navigator.mediaDevices.enumerateDevices().then(async (devices) => {
+      console.log('devices', devices);
+      let inputDevice = await devices.filter((device) => device.kind === 'Camera');
       if (inputDevice.length < 2) {
         await this.setState({
-          facingMode: 'user'
+          facingMode: 'user',
         });
       } else {
         await this.setState({
-          facingMode: { exact: 'environment' }
+          facingMode: { exact: 'environment' },
         });
       }
       this.startCapture();
@@ -63,23 +61,22 @@ class Camera extends Component {
 
   capture = async () => {
     if (!!this.webcam.current) {
-      await getFullFaceDescription(
-        this.webcam.current.getScreenshot(),
-        inputSize
-      ).then(fullDesc => {
-        if (!!fullDesc) {
-          this.setState({
-            detections: fullDesc.map(fd => fd.detection),
-            descriptors: fullDesc.map(fd => fd.descriptor)
-          });
-        }
-      });
+      await getFullFaceDescription(this.webcam.current.getScreenshot(), inputSize).then(
+        (fullDesc) => {
+          if (!!fullDesc) {
+            this.setState({
+              detections: fullDesc.map((fd) => fd.detection),
+              descriptors: fullDesc.map((fd) => fd.descriptor),
+            });
+          }
+        },
+      );
 
       if (!!this.state.descriptors && !!this.state.faceMatcher) {
-        let match = await this.state.descriptors.map(descriptor =>
-          this.state.faceMatcher.findBestMatch(descriptor)
+        let match = await this.state.descriptors.map((descriptor) =>
+          this.state.faceMatcher.findBestMatch(descriptor),
         );
-        if (match && match.length) this.props.findDetectedUser(match)
+        if (match && match.length) this.props.findDetectedUser(match);
         this.setState({ match });
       }
     }
@@ -93,7 +90,7 @@ class Camera extends Component {
       videoConstraints = {
         width: WIDTH,
         height: HEIGHT,
-        facingMode: facingMode
+        facingMode: facingMode,
       };
       if (facingMode === 'user') {
         camera = 'Front';
@@ -117,7 +114,7 @@ class Camera extends Component {
                 borderColor: 'blue',
                 height: _H,
                 width: _W,
-                transform: `translate(${_X}px,${_Y}px)`
+                transform: `translate(${_X}px,${_Y}px)`,
               }}
             >
               {!!match && !!match[i] ? (
@@ -129,7 +126,7 @@ class Camera extends Component {
                     width: _W,
                     marginTop: 0,
                     color: '#fff',
-                    transform: `translate(-3px,${_H}px)`
+                    transform: `translate(-3px,${_H}px)`,
                   }}
                 >
                   {match[i]._label}
@@ -147,12 +144,13 @@ class Camera extends Component {
         style={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center'
+          alignItems: 'center',
         }}
-      ><div
+      >
+        <div
           style={{
             width: WIDTH,
-            height: HEIGHT
+            height: HEIGHT,
           }}
         >
           <div style={{ position: 'relative', width: WIDTH }}>

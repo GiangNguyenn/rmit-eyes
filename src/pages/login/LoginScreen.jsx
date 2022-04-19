@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { register } from '../register/style/RegistrationStyles';
+import { register } from '../../styles/registration';
 import LoginForm from '../../components/LoginForm';
 import logo from '../../asset/general/logo.png';
 import rmitLogo from '../../asset/general/rmit.png';
 import emblem1 from '../../asset/general/emblem1.png';
 import emblem2 from '../../asset/general/emblem2.png';
 
-class Login extends Component {
+class LoginScreen extends Component {
   state = {
     email: '',
     name: '',
@@ -102,4 +102,4 @@ class Login extends Component {
   }
 }
 
-export default withStyles(register)(Login);
+export default withStyles(register)(LoginScreen);

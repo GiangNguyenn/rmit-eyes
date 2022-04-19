@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { register } from './style/RegistrationStyles';
+import { register } from '../../styles/registration';
 import RegisterForm from '../../components/RegisterForm';
 import logo from '../../asset/general/logo.png';
 import rmitLogo from '../../asset/general/rmit.png';
 import emblem1 from '../../asset/general/emblem1.png';
 import emblem2 from '../../asset/general/emblem2.png';
 
-import CloseIcon from '@material-ui/icons/Close';
-
-class Registration extends Component {
+class RegistrationScreen extends Component {
   state = {
     email: '',
     name: '',
@@ -104,4 +102,4 @@ class Registration extends Component {
   }
 }
 
-export default withStyles(register)(Registration);
+export default withStyles(register)(RegistrationScreen);

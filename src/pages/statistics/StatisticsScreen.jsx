@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function StatisticsScreen() {
-  return (
-    <div>StatisticsScreen</div>
-  )
+  return <div>StatisticsScreen</div>;
 }
 
-export default StatisticsScreen
+export default StatisticsScreen;
