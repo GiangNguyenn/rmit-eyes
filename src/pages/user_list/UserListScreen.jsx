@@ -5,7 +5,7 @@ import UsersGridComponent from '../../components/users/UsersGridComponent';
 function UserListScreen() {
   return (
     <div>
-      <UsersGridComponent />
+      <UsersGridComponent approve={false}/>
     </div>
   );
 }

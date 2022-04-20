@@ -5,7 +5,7 @@ import InsightsIcon from '@mui/icons-material/Insights';
 
 export const routes = [
   {
-    route: '/dashboard/admin/:id',
+    route: '/dashboard/admin',
     name: 'Home',
     icon: <ShieldIcon />,
   },

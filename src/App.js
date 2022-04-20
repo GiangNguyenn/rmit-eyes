@@ -18,7 +18,7 @@ function App() {
           <Route path="/registration" element={<Registration />} />
         </Route>
         <Route element={<WithNav />}>
-          <Route path="/dashboard/admin/:id" element={<HomeScreen />} />
+          <Route path="/dashboard/admin" element={<HomeScreen />} />
           <Route path="/user_request" element={<UserRequest />} />
           <Route path="/user_list" element={<UserList />} />
           <Route path="/statistics" element={<StatisticsScreen />} />
