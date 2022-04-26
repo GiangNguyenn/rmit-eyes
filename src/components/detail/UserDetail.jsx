@@ -1,16 +1,10 @@
 import * as React from 'react';
-import { makeStyles  } from '@material-ui/core/styles';
-import { styled } from '@mui/material/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import { createTheme } from '@mui/system';
-import { ThemeProvider } from '@mui/system';
 import MobileStepper from '@mui/material/MobileStepper';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
@@ -105,8 +99,6 @@ const useStyles = makeStyles((theme) => ({
     bgcolor: '#d5bec4', //imageslider bgcolor
   },
 }));
-
-
 
 const STATUS = {
   pending_to_approve: (

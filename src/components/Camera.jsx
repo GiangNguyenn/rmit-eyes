@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import Webcam from 'react-webcam';
 import { loadModels, getFullFaceDescription, createMatcher } from '../api/face';
-import axios from "../http-common";
+import axios from '../http-common';
 
 // Import face profile
 const JSON_PROFILE = require('../descriptors/bnk48.json');
@@ -22,7 +21,7 @@ class Camera extends Component {
       faceMatcher: null,
       match: null,
       facingMode: null,
-      users: null
+      users: null,
     };
   }
 
@@ -30,11 +29,10 @@ class Camera extends Component {
     await loadModels();
     if (this.props.users.length) {
       this.setState({ faceMatcher: await createMatcher(this.props.users) });
-    }
-    else {
+    } else {
       const userList = await axios.get('users/');
       if (userList) {
-        this.setState({users: userList.data});
+        this.setState({ users: userList.data });
       }
       this.setState({ faceMatcher: await createMatcher(this.state.users) });
     }
@@ -67,7 +65,7 @@ class Camera extends Component {
     clearInterval(this.interval);
   }
   componentDidMount() {
-    console.log('this proos users', this.props.users)
+    console.log('this proos users', this.props.users);
   }
 
   capture = async () => {

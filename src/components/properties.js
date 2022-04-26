@@ -3,7 +3,7 @@ import ShieldIcon from '@mui/icons-material/Shield';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import InsightsIcon from '@mui/icons-material/Insights';
 
-export const routes = [
+export const navigationRoutes = [
   {
     route: '/dashboard/admin',
     name: 'Home',

@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Container, TextField, Button, Box } from '@material-ui/core';
 import axios from '../http-common';
-import { useParams } from 'react-router-dom';
 import Camera from './Camera';
-import {getUserLogged} from "../helpers/userHelper";
-import UserDetail from "./detail/UserDetail";
-import UserDescriptionDetail from "./detail/UserDescriptionDetail";
+import { getUserLogged } from '../helpers/userHelper';
+import UserDescriptionDetail from './detail/UserDescriptionDetail';
 
 function AdminDashBoardComponent() {
   const id = getUserLogged();
-  console.log('id', id)
+  console.log('id', id);
   const [user, setUser] = useState({});
   const [userList, setUserList] = useState([]);
   const [detectedUser, setDetectedUser] = useState({});
@@ -38,11 +35,22 @@ function AdminDashBoardComponent() {
   };
   return (
     userList && (
-        <div style={{display: "inline-flex", flexDirection: 'row', width: '100%', justifyContent:'space-around'}}>
+      <div
+        style={{
+          display: 'inline-flex',
+          flexDirection: 'row',
+          width: '100%',
+          justifyContent: 'space-around',
+        }}
+      >
         <Camera users={userList} findDetectedUser={findDetectedUser} />
-          {/*<div> Bee vo </div>*/}
-          {detectedUser ? <UserDescriptionDetail user={detectedUser}/>: <div style={{width:'400px'}}> </div> }
-        </div>
+        {/*<div> Bee vo </div>*/}
+        {detectedUser ? (
+          <UserDescriptionDetail user={detectedUser} />
+        ) : (
+          <div style={{ width: '400px' }}> </div>
+        )}
+      </div>
     )
   );
 }

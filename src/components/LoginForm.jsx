@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, TextField, Button, Box } from '@material-ui/core';
 import axios from '../http-common';
-import {getUserLogged, storeUserSession} from '../helpers/userHelper';
+import { getUserLogged, storeUserSession } from '../helpers/userHelper';
 import { useNavigate } from 'react-router-dom';
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -14,7 +14,6 @@ function LoginForm() {
       console.log('go here ', result.data);
       storeUserSession(result.data.user_id);
       if (getUserLogged()) navigate('/dashboard/admin');
-
     }
   };
 
