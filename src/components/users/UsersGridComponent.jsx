@@ -69,6 +69,10 @@ const options = {
     color: '#FFF',
   },
 };
+const STATUS = {
+  pending_to_approve: <Chip style={{position: "absolute", top: '10px', right:'10px' }} size="big" label="PENDING" color="primary" />,
+  approved:  <Chip style={{position: "absolute", top: '10px', right:'10px' }} size="big" label="APPROVED" color="success" />,
+};
 const UserGridComponent = (props) => {
   // const { data } = props;
   const params = useParams();
@@ -79,10 +83,6 @@ const UserGridComponent = (props) => {
       }});
     response && setUsers(response.data);
   }, [params]);
-
-  const STATUS = {
-    pending_to_approve: <Chip size="small" label="PENDING" color="primary" />,
-  };
 
   const classes = useStyles();
   const handleApprove = (sid) => {
@@ -108,7 +108,7 @@ const UserGridComponent = (props) => {
           {
             title: 'Status',
             field: 'status',
-            render: (rowData) => <>{STATUS[rowData.status]}</>,
+            render: (rowData) => (STATUS[rowData.status])
           },
           {
             title: 'Approve',
