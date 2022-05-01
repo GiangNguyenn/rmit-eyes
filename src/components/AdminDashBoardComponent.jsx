@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from '../http-common';
 import Camera from './Camera';
 import { getUserLogged } from '../helpers/userHelper';
+import UserDetail from './detail/UserDetail';
 import UserDescriptionDetail from './detail/UserDescriptionDetail';
 
 function AdminDashBoardComponent() {
@@ -30,9 +31,13 @@ function AdminDashBoardComponent() {
   const findDetectedUser = (match) => {
     if (match && match.length) {
       const sid = match[0]._label.split(' ')[1];
-      setDetectedUser(userList.find((user) => user.sid === sid));
+      console.log('siddddd', sid)
+      setDetectedUser(userList.find((user) => {
+        return user.sid === sid
+      }));
     }
   };
+  console.log(detectedUser);
   return (
     userList && (
       <div

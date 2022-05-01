@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import Webcam from 'react-webcam';
 import { loadModels, getFullFaceDescription, createMatcher } from '../api/face';
-import axios from '../http-common';
-
+import axios from "../http-common";
 // Import face profile
 const JSON_PROFILE = require('../descriptors/bnk48.json');
 
 const WIDTH = 800;
 const HEIGHT = 800;
 const inputSize = 160;
+
+
+
 
 class Camera extends Component {
   constructor(props) {

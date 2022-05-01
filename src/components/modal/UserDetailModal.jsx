@@ -1,7 +1,11 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
-import UserDetail from '../detail/UserDetail';
+import Chip from "@mui/material/Chip";
+import UserDetail from "../detail/UserDetail";
+
+
+
 
 export default function UserDetailModal(props) {
   const [open, setOpen] = React.useState(false);
