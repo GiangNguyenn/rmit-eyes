@@ -21,14 +21,13 @@ export function logout() {
 
 export async function login(username, password) {
   const response = await axios.post('/auth/login', { username, password });
+  console.log(response);
   return (dispatch) => {
-    if (response.status === 200) {
-      const token = response.data.accessToken;
-      localStorage.setItem('jwtToken', token);
-      setAuthorizationToken(token);
-      console.log(jwtDecode(token));
-      dispatch(setCurrentUser(jwtDecode(token)));
-      useNavigate('/dashboard/admin');
-    }
+    const token = response.data.accessToken;
+    localStorage.setItem('jwtToken', token);
+    setAuthorizationToken(token);
+    console.log(jwtDecode(token));
+    dispatch(setCurrentUser(jwtDecode(token)));
+    useNavigate('/dashboard/admin');
   };
 }

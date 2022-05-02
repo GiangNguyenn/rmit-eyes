@@ -9,10 +9,10 @@ import { login } from '../redux/actions/authActions';
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(username, password);
+    login(username, password)()
   };
 
   return (
