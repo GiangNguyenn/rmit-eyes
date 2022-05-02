@@ -3,16 +3,15 @@ import { Container, TextField, Button, Box } from '@material-ui/core';
 import axios from '../http-common';
 import { getUserLogged, storeUserSession } from '../helpers/userHelper';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/actions/authActions';
+import {connect} from "react-redux";
 
-function LoginForm() {
+function LoginForm(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    login(username, password)()
+    props.login(username, password)
   };
 
   return (
@@ -54,5 +53,9 @@ function LoginForm() {
     </Container>
   );
 }
+const mapReduxStateToProp = (state) => {
+  console.log('state all', state)
+  return {admin: state.admin}
+}
 
-export default LoginForm;
+export default connect(mapReduxStateToProp, {login})(LoginForm);

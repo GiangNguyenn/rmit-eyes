@@ -7,7 +7,7 @@ import { AuthActionTypes } from '../constants/actionTypes';
 export function setCurrentUser(user) {
   return {
     type: AuthActionTypes.SET_CURRENT_USER,
-    user,
+    payload: user
   };
 }
 
@@ -19,15 +19,14 @@ export function logout() {
   };
 }
 
-export async function login(username, password) {
-  const response = await axios.post('/auth/login', { username, password });
-  console.log(response);
-  return (dispatch) => {
+export const login = (username, password) => {
+  return async (dispatch ) => {
+    const response = await axios.post('/auth/login', { username, password });
     const token = response.data.accessToken;
     localStorage.setItem('jwtToken', token);
     setAuthorizationToken(token);
     console.log(jwtDecode(token));
-    dispatch(setCurrentUser(jwtDecode(token)));
+    dispatch({type: 'SET_ADMIN', payload: response.data})
     useNavigate('/dashboard/admin');
   };
 }

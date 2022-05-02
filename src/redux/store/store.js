@@ -5,11 +5,13 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import setAuthorizationToken from '../../utils/setAuthorizationToken';
 import { setCurrentUser } from '../actions/authActions';
 import authReducer from '../reducers/authReducer';
-const reducers = { auth: authReducer };
+import adminReducer from "../reducers/adminReducer";
+import {selectedUserReducer, usersReducer} from "../reducers/usersReducer";
+const reducers = { admin: adminReducer, users: usersReducer, selectedUser: selectedUserReducer};
 
 const store = createStore(
   combineReducers(reducers),
-  compose(applyMiddleware(thunk), window.devToolsExtension ? window.devToolsExtension() : (f) => f),
+  applyMiddleware(thunk)
 );
 
 if (localStorage.jwtToken) {
