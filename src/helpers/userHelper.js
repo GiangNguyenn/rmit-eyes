@@ -1,8 +1,9 @@
-export const storeUserSession = (user_id) => {
-  return localStorage.setItem('isLogged', user_id);
+export const storeUserSession = (userData) => {
+  return localStorage.setItem('user', userData);
 };
 
 export const getUserLogged = () => localStorage.getItem('isLogged');
+
 export const clearUserSession = () => {
   return localStorage.removeItem('isLogged');
 };

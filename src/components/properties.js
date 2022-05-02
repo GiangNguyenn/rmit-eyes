@@ -2,6 +2,7 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import ShieldIcon from '@mui/icons-material/Shield';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import InsightsIcon from '@mui/icons-material/Insights';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export const navigationRoutes = [
   {

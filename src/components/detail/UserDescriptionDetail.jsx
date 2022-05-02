@@ -48,19 +48,6 @@ export default function UserDescriptionDetail(props) {
         <img width={300} height={300} src={IMAGE_URLS[status]} />
       </div>
       <div>
-<<<<<<< HEAD
-        <Typography gutterBottom variant="h4" component="div">
-          User Detail{' '}
-        </Typography>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          Name: {student_name}
-        </Typography>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          ID Number: {sid}
-        </Typography>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          Vaccination: {STATUS[status]}
-=======
       <Typography gutterBottom variant="h4" component="div"> User Detail </Typography>
       <Typography id="modal-modal-title" variant="h6" component="h2">
         Name: {student_name}
@@ -73,7 +60,6 @@ export default function UserDescriptionDetail(props) {
       </Typography>
         <Typography id="modal-modal-title" variant="h6" component="h2">
           CurrentTemp: {temp}
->>>>>>> 66face6d577ec7c9283b5ac07012362ac7b95622
         </Typography>
       </div>
       {status === 'pending_to_approve' ? null : <ConfirmCheckinModal />}

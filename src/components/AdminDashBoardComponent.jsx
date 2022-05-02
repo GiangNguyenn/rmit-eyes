@@ -7,7 +7,6 @@ import UserDescriptionDetail from './detail/UserDescriptionDetail';
 
 function AdminDashBoardComponent() {
   const id = getUserLogged();
-  console.log('id', id);
   const [user, setUser] = useState({});
   const [userList, setUserList] = useState([]);
   const [detectedUser, setDetectedUser] = useState({});
@@ -19,7 +18,6 @@ function AdminDashBoardComponent() {
         },
       });
       if (user) {
-        console.log('user', user);
         setUser(user.data);
       }
     }
@@ -31,13 +29,11 @@ function AdminDashBoardComponent() {
   const findDetectedUser = (match) => {
     if (match && match.length) {
       const sid = match[0]._label.split(' ')[1];
-      console.log('siddddd', sid)
       setDetectedUser(userList.find((user) => {
         return user.sid === sid
       }));
     }
   };
-  console.log(detectedUser);
   return (
     userList && (
       <div

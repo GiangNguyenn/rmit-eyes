@@ -5,6 +5,7 @@ import NavBarButton from './NavBarButton';
 import NavbarLogo from './NavbarLogo';
 
 import { navigationRoutes } from '../properties';
+import NavProfile from './NavProfile';
 
 const useStyles = makeStyles((theme) => ({
   navlinks: {
@@ -28,6 +29,7 @@ const NavBar = () => {
             return <NavBarButton path={route.route} name={route.name} icon={route.icon} />;
           })}
         </div>
+        <NavProfile />
       </Toolbar>
     </AppBar>
   );
