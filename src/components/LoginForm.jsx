@@ -4,25 +4,15 @@ import axios from '../http-common';
 import { getUserLogged, storeUserSession } from '../helpers/userHelper';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { authActions } from '../redux/store/authSlice';
+import { login } from '../redux/actions/authActions';
+
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { user } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await axios.post('/auth/login', { username, password });
-    if (result) {
-      dispatch(authActions.login(result.data));
-      storeUserSession(result.data.user_id);
-      console.log('Object.entries(user).length !== 0', Object.entries(user).length !== 0)
-      if (Object.entries(user).length !== 0) {
-        navigate('/dashboard/admin');
-      } else {
-      }
-    }
+    await login(username, password);
   };
 
   return (

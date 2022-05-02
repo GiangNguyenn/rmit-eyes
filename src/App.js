@@ -12,24 +12,21 @@ import AdminProfileScreen from './pages/admin_profile/AdminProfileScreen';
 import { useSelector } from 'react-redux';
 
 function App() {
-  const { user } = useSelector((state) => state.auth);
   return (
     <div>
       <Routes>
-        {Object.entries(user).length === 0 ? (
-          <Route element={<WithoutNav />}>
-            <Route path="/" element={<Login />} />
-            <Route path="/registration" element={<Registration />} />
-          </Route>
-        ) : (
-          <Route element={<WithNav />}>
-            <Route path="/profile" element={<AdminProfileScreen />} />
-            <Route path="/dashboard/admin" element={<HomeScreen />} initial />
-            <Route path="/user_request" element={<UserRequest />} />
-            <Route path="/user_list" element={<UserList />} />
-            <Route path="/statistics" element={<StatisticsScreen />} />
-          </Route>
-        )}
+        <Route element={<WithoutNav />}>
+          <Route path="/" element={<Login />} />
+          <Route path="/registration" element={<Registration />} />
+        </Route>
+
+        <Route element={<WithNav />}>
+          <Route path="/profile" element={<AdminProfileScreen />} />
+          <Route path="/dashboard/admin" element={<HomeScreen />} initial />
+          <Route path="/user_request" element={<UserRequest />} />
+          <Route path="/user_list" element={<UserList />} />
+          <Route path="/statistics" element={<StatisticsScreen />} />
+        </Route>
       </Routes>
     </div>
   );
