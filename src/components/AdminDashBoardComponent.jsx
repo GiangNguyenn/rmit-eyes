@@ -13,6 +13,7 @@ function AdminDashBoardComponent() {
   const [user, setUser] = useState({});
   const [userList, setUserList] = useState([]);
   const [detectedUser, setDetectedUser] = useState({});
+  const [queueUsers, setQueueUsers] = useState([]);
   useEffect(async () => {
     if (id) {
       const user = await axios.get('users/findUser', {
@@ -21,7 +22,6 @@ function AdminDashBoardComponent() {
         },
       });
       if (user) {
-        console.log('user', user);
         setUser(user.data);
       }
     }
@@ -32,14 +32,14 @@ function AdminDashBoardComponent() {
   }, [id]);
   const findDetectedUser = (match) => {
     if (match && match.length) {
-      const sid = match[0]._label.split(' ')[1];
-      console.log('siddddd', sid)
-      setDetectedUser(userList.find((user) => {
-        return user.sid === sid
-      }));
+      const sid = match[0]._label.split('---')[1];
+      const found = userList.find((user) => user.sid === sid)
+      if (found) {
+        setDetectedUser(found);
+        if (found && Object.keys(found) && !queueUsers.includes(found.sid)) setQueueUsers([...queueUsers, found.sid]);
+      };
     }
   };
-  console.log(detectedUser);
   return (
     userList && (
       <div
@@ -53,7 +53,7 @@ function AdminDashBoardComponent() {
         <Camera users={userList} findDetectedUser={findDetectedUser} />
         {/*<div> Bee vo </div>*/}
         {detectedUser ? (
-          <UserDescriptionDetail user={detectedUser} />
+          <UserDescriptionDetail user={detectedUser} queueUsers={queueUsers}/>
         ) : (
           <div style={{ width: '400px' }}> </div>
         )}
