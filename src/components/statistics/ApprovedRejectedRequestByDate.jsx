@@ -24,7 +24,7 @@ function ApprovedRejectedRequestByDate() {
     <ContainerCard
       chart={
         <BarChart
-          title="Check-in frequency by date for the last week"
+          title="Registration Request by date"
           labels={daysArray}
           type="stacked"
           dataPoint1={{
