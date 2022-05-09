@@ -38,6 +38,7 @@ function LoginForm() {
             label="password"
             fullWidth
             autoComplete="password"
+            type={'password'}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             autoFocus

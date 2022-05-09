@@ -20,6 +20,11 @@ export const routes = [
     icon: <PersonSearchIcon />,
   },
   {
+    route: '/checkin_list',
+    name: 'Checkin List',
+    icon: <PersonSearchIcon />,
+  },
+  {
     route: '/statistics',
     name: 'Statistics',
     icon: <InsightsIcon />,

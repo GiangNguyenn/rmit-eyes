@@ -8,6 +8,7 @@ import HomeScreen from './pages/home/HomeScreen';
 import UserList from './pages/user_list/UserListScreen';
 import UserRequest from './pages/user_request/UserRequestScreen';
 import StatisticsScreen from './pages/statistics/StatisticsScreen';
+import CheckInListing from "./components/checkin/CheckinListing";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/dashboard/admin" element={<HomeScreen />} />
           <Route path="/user_request" element={<UserRequest />} />
           <Route path="/user_list" element={<UserList />} />
+          <Route path="/checkin_list" element={<CheckInListing />} />
           <Route path="/statistics" element={<StatisticsScreen />} />
         </Route>
       </Routes>

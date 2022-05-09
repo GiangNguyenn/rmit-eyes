@@ -67,7 +67,8 @@ const RegisterForm = () => {
     data.append('file', e.target.files[0]);
     fileToDataUri(e.target.files[0]).then(async (uri) => {
       const desc = await faceApi.getFullFaceDescription(uri);
-      if (desc.length === 0) {
+      console.log('desc', desc, name);
+      if (e.target.name === 'image' && desc.length === 0) {
         alert('Wrong Image Uploaded! Please Upload your real image.');
         return;
       }
@@ -77,7 +78,7 @@ const RegisterForm = () => {
       // check existing uploaded image
       if (e.target.name === 'image') {
         setImageDescriptor(descriptionString);
-      } else setImageWithMaskDescriptor(descriptionString);
+      }
     });
     axios
       .post('/upload', data)
@@ -101,11 +102,11 @@ const RegisterForm = () => {
   }, []);
 
   const isValidInput = () =>
-    image && imageWithMask && vaccineDocument && imageDescriptor && imageWithMaskDescriptor;
+    image && imageWithMask && vaccineDocument && imageDescriptor;
   return (
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
       <Form.Item
-        label="Name"
+        label="Your Full Name"
         rules={[
           {
             required: true,
@@ -119,13 +120,14 @@ const RegisterForm = () => {
         rules={[
           {
             type: 'email',
+            required: true
           },
         ]}
       >
         <Input value={email} onChange={(e) => setEmail(e.target.value)} />
       </Form.Item>
       <Form.Item label="Student ID">
-        <Input value={sid} onChange={(e) => setSid(e.target.value)} />
+        <Input value={sid} onChange={(e) => setSid(e.target.value)}  />
       </Form.Item>
       <Form.Item label="Phone">
         <Input value={phone} onChange={(e) => setPhone(e.target.value)} />
