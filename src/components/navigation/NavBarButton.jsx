@@ -29,12 +29,12 @@ const useStyles = makeStyles((theme) => ({
 
 const NavBarButton = (props) => {
   const { path, name, icon } = props;
-  const classes = useStyles();
+  const {link, navLinkContainer} = useStyles();
 
   return (
     path && (
-      <Link to={path} className={classes.link}>
-        <div className={classes.navLinkContainer}>
+      <Link to={path} className={link}>
+        <div className={navLinkContainer}>
           {icon}
           {name}
         </div>

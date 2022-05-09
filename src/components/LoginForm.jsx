@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
 import { Container, TextField, Button, Box } from '@material-ui/core';
 import axios from '../http-common';
-import {getUserLogged, storeUserSession} from '../helpers/userHelper';
+import { getUserLogged, storeUserSession } from '../helpers/userHelper';
 import { useNavigate } from 'react-router-dom';
-function LoginForm() {
+import { login } from '../redux/actions/authActions';
+import {connect} from "react-redux";
+
+function LoginForm(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await axios.post('/auth/login', { username, password });
-    if (result) {
-      console.log('go here ', result.data);
-      storeUserSession(result.data.user_id);
-      if (getUserLogged()) navigate('/dashboard/admin');
-
-    }
+    props.login(username, password)
   };
 
   return (
@@ -57,5 +53,9 @@ function LoginForm() {
     </Container>
   );
 }
+const mapReduxStateToProp = (state) => {
+  console.log('state all', state)
+  return {admin: state.admin}
+}
 
-export default LoginForm;
+export default connect(mapReduxStateToProp, {login})(LoginForm);
