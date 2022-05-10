@@ -10,6 +10,7 @@ import UserDetail from "../detail/UserDetail";
 export default function UserDetailModal(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
+    console.log(props.user)
     setOpen(true);
   }
   const handleClose = () => setOpen(false);
