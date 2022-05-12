@@ -32,7 +32,7 @@ function AdminDashBoardComponent() {
   }, [id]);
   const findDetectedUser = (match) => {
     if (match && match.length) {
-      const sid = match[0]._label.split('---')[1];
+      const sid = match[0]._label.split('----')[1];
       const found = userList.find((user) => user.sid === sid)
       if (found) {
         setDetectedUser(found);
