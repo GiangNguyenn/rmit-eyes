@@ -5,10 +5,29 @@ import MaterialTable from 'material-table';
 import Chip from '@mui/material/Chip';
 import axios from '../../http-common';
 import { Button } from '@mui/material';
-import { Search, Delete, Download, ChevronsDown, PlusCircle, Trash2, Edit } from 'react-feather';
+import 'antd/dist/antd.css';
+import { Button as Btn, Tag } from 'antd';
+import {
+  Search,
+  XSquare,
+  Delete,
+  Download,
+  ChevronsDown,
+  PlusCircle,
+  Trash2,
+  Edit,
+} from 'react-feather';
 import UserDetailModal from '../modal/UserDetailModal';
+import { Modal as Mol } from 'antd';
+import RegisterForm from '../RegisterForm';
+import { CheckCircleOutlined, SyncOutlined } from '@ant-design/icons';
 import AvatarCell from './AvatarCell';
 import RejectFormModal from '../modal/RejectFormModal';
+
+const today = new Date();
+const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+const currentTimeString = date + ' ' + time;
 
 const useStyles = makeStyles((theme) => ({
   listContainer: {
@@ -71,6 +90,11 @@ const UserGridComponent = (props) => {
   // const { data } = props;
   const params = useParams();
   const [users, setUsers] = useState([]);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => setOpen(false);
   useEffect(async () => {
     const response = await axios.get('users', {
       params: {
@@ -88,86 +112,102 @@ const UserGridComponent = (props) => {
       .then((res) => console.log(res));
   };
   return (
-    <div className={classes.listContainer}>
-      <MaterialTable
-        data={users}
-        columns={[
-          {
-            title: 'SID',
-            field: 'sid',
-          },
-          {
-            title: 'Avatar',
-            field: 'image',
-            render: (rowData) => rowData.image && <AvatarCell value={rowData.image} />,
-          },
-          {
-            title: 'Name',
-            field: 'student_name',
-            defaultSort: 'desc',
-          },
+    <>
+      <div className={classes.listContainer}>
+        <MaterialTable
+          data={users}
+          icons={tableIcons}
+          options={options}
+          title="Validated Users"
+          columns={[
+            {
+              title: 'SID',
+              field: 'sid',
+            },
+            {
+              title: 'Avatar',
+              field: 'image',
+              render: (rowData) => rowData.image && <AvatarCell value={rowData.image} />,
+            },
+            {
+              title: 'Name',
+              field: 'student_name',
+              defaultSort: 'desc',
+            },
 
-          {
-            title: 'Status',
-            field: 'status',
-            render: (rowData) => <>{STATUS[rowData.status]}</>,
-          },
-          {
-            title: 'Details',
-            field: '',
-            render: (rowData) => <UserDetailModal user={rowData} />,
-          },
-          props.approve
-            ? {
-                title: 'Actions',
-                field: '',
-                render: (rowData) => (
-                  <div style={{ display: 'flex', margin: '1rem' }}>
-                    <Button
-                      style={{ margin: '10px' }}
-                      variant="contained"
-                      color="success"
-                      onClick={() => handleApprove(rowData.sid)}
-                    >
-                      Approve
-                    </Button>
-                    <RejectFormModal
-                      user={{ to_name: rowData.name, mail: rowData.email, sid: rowData.sid }}
-                    />
-                  </div>
-                ),
-              }
-            : {},
+            {
+              title: 'Status',
+              field: 'status',
+              render: (rowData) => <>{STATUS[rowData.status]}</>,
+            },
+            {
+              title: 'Details',
+              field: '',
+              render: (rowData) => <UserDetailModal user={rowData} />,
+            },
+            props.approve
+              ? {
+                  title: 'Actions',
+                  field: '',
+                  render: (rowData) => (
+                    <div style={{ display: 'flex', margin: '1rem' }}>
+                      <Button
+                        style={{ margin: '10px' }}
+                        variant="contained"
+                        color="success"
+                        onClick={() => handleApprove(rowData.sid)}
+                      >
+                        Approve
+                      </Button>
+                      <RejectFormModal
+                        user={{ to_name: rowData.name, mail: rowData.email, sid: rowData.sid }}
+                      />
+                    </div>
+                  ),
+                }
+              : {},
+          ]}
+          actions={[
+            {
+              icon: () => <PlusCircle />,
+              tooltip: 'Add Row',
+              isFreeAction: true,
+              onClick: (event) => handleOpen(),
+            },
+            {
+              icon: () => <PlusCircle />,
+              tooltip: 'Add Row',
+              disabled: true,
+            },
+            {
+              icon: () => <Trash2 />,
+              tooltip: 'Delete Row',
+              isFreeAction: true,
+              disabled: true,
+            },
+            {
+              icon: () => <Trash2 />,
+              tooltip: 'Delete Row',
+              onClick: (evt, data) => alert('You want to delete a row'),
+            },
+          ]}
+        />
+      </div>
+      <Mol
+        title="Add New User Form"
+        visible={open}
+        onCancel={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        footer={[
+          <Btn key="back" onClick={handleClose}>
+            Return
+          </Btn>,
         ]}
-        actions={[
-          {
-            icon: () => <PlusCircle />,
-            tooltip: 'Add Row',
-            isFreeAction: true,
-            onClick: (event) => alert('You want to add a new row'),
-          },
-          {
-            icon: () => <PlusCircle />,
-            tooltip: 'Add Row',
-            disabled: true,
-          },
-          {
-            icon: () => <Trash2 />,
-            tooltip: 'Delete Row',
-            isFreeAction: true,
-            disabled: true,
-          },
-          {
-            icon: () => <Trash2 />,
-            tooltip: 'Delete Row',
-            onClick: (evt, data) => alert('You want to delete a row'),
-          },
-        ]}
-        icons={tableIcons}
-        options={options}
-        title="Validated Users"
-      />
-    </div>
+      >
+        <RegisterForm />
+      </Mol>
+    </>
   );
 };
 
