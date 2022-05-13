@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function AvatarCell(props) {
   return <img src={props.value} alt="" width={60} height={60} />;
@@ -7,5 +7,5 @@ export default function AvatarCell(props) {
 export const avatarColumnProps = {
   maxWidth: 60,
   filterable: false,
-  Cell: AvatarCell
+  Cell: AvatarCell,
 };

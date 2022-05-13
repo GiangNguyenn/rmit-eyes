@@ -13,7 +13,6 @@ function StatisticsScreen() {
       columns={12}
       style={{ display: 'flex', position: 'relative' }}
       justifyContent="space-between"
-
     >
       <Grid item xs={6}>
         <DailyCheckinFrequencyBarChart />

@@ -8,7 +8,7 @@ import HomeScreen from './pages/home/HomeScreen';
 import UserList from './pages/user_list/UserListScreen';
 import UserRequest from './pages/user_request/UserRequestScreen';
 import StatisticsScreen from './pages/statistics/StatisticsScreen';
-import CheckInListing from "./components/checkin/CheckinListing";
+import CheckInListing from './components/checkin/CheckinListing';
 
 function App() {
   return (

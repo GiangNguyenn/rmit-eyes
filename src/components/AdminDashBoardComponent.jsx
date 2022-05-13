@@ -33,11 +33,12 @@ function AdminDashBoardComponent() {
   const findDetectedUser = (match) => {
     if (match && match.length) {
       const sid = match[0]._label.split('----')[1];
-      const found = userList.find((user) => user.sid === sid)
+      const found = userList.find((user) => user.sid === sid);
       if (found) {
         setDetectedUser(found);
-        if (found && Object.keys(found) && !queueUsers.includes(found.sid)) setQueueUsers([...queueUsers, found.sid]);
-      };
+        if (found && Object.keys(found) && !queueUsers.includes(found.sid))
+          setQueueUsers([...queueUsers, found.sid]);
+      }
     }
   };
   return (
@@ -53,7 +54,7 @@ function AdminDashBoardComponent() {
         <Camera users={userList} findDetectedUser={findDetectedUser} />
         {/*<div> Bee vo </div>*/}
         {detectedUser ? (
-          <UserDescriptionDetail user={detectedUser} queueUsers={queueUsers}/>
+          <UserDescriptionDetail user={detectedUser} queueUsers={queueUsers} />
         ) : (
           <div style={{ width: '400px' }}> </div>
         )}

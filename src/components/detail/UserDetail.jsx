@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { makeStyles  } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { styled } from '@mui/material/styles';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -105,8 +105,6 @@ const useStyles = makeStyles((theme) => ({
     bgcolor: '#d5bec4', //imageslider bgcolor
   },
 }));
-
-
 
 const STATUS = {
   pending_to_approve: (
