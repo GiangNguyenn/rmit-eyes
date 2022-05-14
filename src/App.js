@@ -24,6 +24,7 @@ function App() {
           <Route path="/dashboard/admin" element={<HomeScreen />} initial />
           <Route path="/user_request" element={<UserRequest />} />
           <Route path="/user_list" element={<UserList />} />
+          <Route path="/checkin_list" element={<CheckInListing />} />
           <Route path="/statistics" element={<StatisticsScreen />} />
         </Route>
       </Routes>
