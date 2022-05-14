@@ -147,7 +147,7 @@ const CheckInListing = (props) => {
         ]}
         icons={tableIcons}
         options={options}
-        title="Validated Users"
+        title="Checked in Users"
       />
     </div>
   );
