@@ -78,6 +78,7 @@ const options = {
     justifyContent: 'space-around',
   },
 };
+
 const STATUS = {
   pending_to_approve: (
     <Chip style={{ position: 'relative' }} size="medium" label="PENDING" color="warning" />
@@ -118,7 +119,7 @@ const UserGridComponent = (props) => {
           data={users}
           icons={tableIcons}
           options={options}
-          title="Validated Users"
+          title={props.approve ? 'Registering users' : 'Validated users'}
           columns={[
             {
               title: 'SID',
