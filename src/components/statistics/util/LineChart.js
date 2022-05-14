@@ -49,7 +49,7 @@ export function LineChart(props) {
       yAxes: {
         position: 'left',
         maintainAspectRatio: true,
-        beginAtZero:false,
+        beginAtZero: false,
       },
     },
     plugins: {
@@ -57,10 +57,10 @@ export function LineChart(props) {
         display: true,
         text: title,
         position: 'top',
-        font:{
+        font: {
           size: 20,
-          weight:"bold"
-        }
+          weight: 'bold',
+        },
       },
     },
   };

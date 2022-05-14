@@ -10,9 +10,8 @@ export async function loadModels() {
 
 const STATUS = {
   pending_to_approve: 'Pending ...',
-  approved: 'Approved ✔'
-}
-
+  approved: 'Approved ✔',
+};
 
 export async function getFullFaceDescription(blob, inputSize = 512) {
   // tiny_face_detector options
@@ -44,10 +43,8 @@ export async function createMatcher(faceProfile) {
     .map((profile) => {
       if (profile.image_descriptor && profile.image_with_mask_descriptor) {
         return new faceapi.LabeledFaceDescriptors(
-           profile.student_name + '----' + profile.sid + '----' + STATUS[profile.status],
-          [
-            Float32Array.from(profile.image_descriptor.split(',')),
-          ],
+          profile.student_name + '----' + profile.sid + '----' + STATUS[profile.status],
+          [Float32Array.from(profile.image_descriptor.split(','))],
         );
       }
     });

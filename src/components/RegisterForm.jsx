@@ -101,8 +101,7 @@ const RegisterForm = () => {
     await loadModels();
   }, []);
 
-  const isValidInput = () =>
-    image && imageWithMask && vaccineDocument && imageDescriptor;
+  const isValidInput = () => image && imageWithMask && vaccineDocument && imageDescriptor;
   return (
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
       <Form.Item
@@ -120,14 +119,14 @@ const RegisterForm = () => {
         rules={[
           {
             type: 'email',
-            required: true
+            required: true,
           },
         ]}
       >
         <Input value={email} onChange={(e) => setEmail(e.target.value)} />
       </Form.Item>
       <Form.Item label="Student ID">
-        <Input value={sid} onChange={(e) => setSid(e.target.value)}  />
+        <Input value={sid} onChange={(e) => setSid(e.target.value)} />
       </Form.Item>
       <Form.Item label="Phone">
         <Input value={phone} onChange={(e) => setPhone(e.target.value)} />

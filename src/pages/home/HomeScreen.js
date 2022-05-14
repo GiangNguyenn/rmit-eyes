@@ -32,7 +32,7 @@ class HomeScreen extends Component {
             <h1 style={{ color: '#020052' }}>Admin Dashboard</h1>
           </div>
         </div>
-        <div className={classes.paper} style={{width: '70vw'}}>
+        <div className={classes.paper} style={{ width: '70vw' }}>
           <AdminDashBoardComponent />
         </div>
       </div>

@@ -1,11 +1,11 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Theme, createStyles, makeStyles  } from '@material-ui/core/styles';
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import MaterialTable from 'material-table';
 import Chip from '@mui/material/Chip';
 import axios from '../../http-common';
-import {Button} from "@mui/material";
-import moment from 'moment'
+import { Button } from '@mui/material';
+import moment from 'moment';
 import {
   Search,
   XSquare,
@@ -16,7 +16,7 @@ import {
   Trash2,
   Edit,
 } from 'react-feather';
-import UserDetailModal from "../modal/UserDetailModal";
+import UserDetailModal from '../modal/UserDetailModal';
 
 const today = new Date();
 const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -71,8 +71,22 @@ const options = {
   },
 };
 const STATUS = {
-  pending_to_approve: <Chip style={{position: "absolute", top: '10px', right:'10px' }} size="big" label="PENDING" color="primary" />,
-  approved:  <Chip style={{position: "absolute", top: '10px', right:'10px' }} size="big" label="APPROVED" color="success" />,
+  pending_to_approve: (
+    <Chip
+      style={{ position: 'absolute', top: '10px', right: '10px' }}
+      size="big"
+      label="PENDING"
+      color="primary"
+    />
+  ),
+  approved: (
+    <Chip
+      style={{ position: 'absolute', top: '10px', right: '10px' }}
+      size="big"
+      label="APPROVED"
+      color="success"
+    />
+  ),
 };
 const CheckInListing = (props) => {
   // const { data } = props;
@@ -104,9 +118,8 @@ const CheckInListing = (props) => {
           {
             title: 'Checkin Time',
             field: 'checkin_time',
-            render: (rowData) => (moment(rowData.checkin_time).format('HH:mm:ss DD-MM-YYYY'))
-
-          }
+            render: (rowData) => moment(rowData.checkin_time).format('HH:mm:ss DD-MM-YYYY'),
+          },
         ]}
         actions={[
           {

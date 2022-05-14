@@ -14,7 +14,9 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 export function BarChart(props) {
   const { datasets, labels, title, type, dataPoint1, dataPoint2, dataPoint3 } = props;
-  type === 'stacked' ? console.log('first', [dataPoint1, dataPoint2, dataPoint3]) :console.log('first', [datasets])
+  type === 'stacked'
+    ? console.log('first', [dataPoint1, dataPoint2, dataPoint3])
+    : console.log('first', [datasets]);
 
   const options = {
     legend: { display: true },
