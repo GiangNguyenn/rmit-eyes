@@ -125,7 +125,7 @@ const UserGridComponent = (props) => {
               field: 'sid',
             },
             {
-              title: 'Avatar',
+              title: 'Face Image',
               field: 'image',
               render: (rowData) => rowData.image && <AvatarCell value={rowData.image} />,
             },
@@ -160,7 +160,7 @@ const UserGridComponent = (props) => {
                         Approve
                       </Button>
                       <RejectFormModal
-                        user={{ to_name: rowData.name, mail: rowData.email, sid: rowData.sid }}
+                        user={{ to_name: rowData.name, mail: rowData.email, sid: rowData.sid}} setUsers={setUsers} users={users}
                       />
                     </div>
                   ),

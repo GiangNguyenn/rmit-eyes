@@ -26,7 +26,9 @@ export default function RejectFormModal(props) {
     });
     axios
       .delete('/users/user/delete', { data: { sid: props.user.sid } })
-      .then((res) => console.log(res));
+      .then((res) => {
+        props.setUsers(props.users.filter(user => user.email !== props.user.email && user.sid !== props.user.sid ))
+      });
     setOpen(false);
   };
 
