@@ -5,7 +5,7 @@ import Modal from '@mui/material/Modal';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import axios from '../../http-common';
-import emailJS from '../email/emailJS';
+import emailJS from '../email/emailJSRejectionEmailjs';
 
 export default function RejectFormModal(props) {
   const [open, setOpen] = useState(false);
@@ -19,16 +19,23 @@ export default function RejectFormModal(props) {
 
   const handleRejection = () => {
     console.log('props.user', typeof props.user.sid);
-    emailJS({
-      ...props.user,
-      reason: rejectReason,
-      url: 'http://localhost:3000/registration',
+
+    axios.delete('/users/user/delete', { data: { sid: props.user.sid } }).then((res) => {
+      if (res.status === 200) {
+        props.setUsers(
+          props.users.filter(
+            (user) => user.email !== props.user.email && user.sid !== props.user.sid,
+          ),
+        );
+        emailJS({
+          ...props.user,
+          reason: rejectReason,
+          url: 'http://localhost:3000/registration',
+        });
+      } else {
+        console.warn(res.status);
+      }
     });
-    axios
-      .delete('/users/user/delete', { data: { sid: props.user.sid } })
-      .then((res) => {
-        props.setUsers(props.users.filter(user => user.email !== props.user.email && user.sid !== props.user.sid ))
-      });
     setOpen(false);
   };
 

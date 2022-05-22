@@ -23,6 +23,7 @@ import RegisterForm from '../RegisterForm';
 import { CheckCircleOutlined, SyncOutlined } from '@ant-design/icons';
 import AvatarCell from './AvatarCell';
 import RejectFormModal from '../modal/RejectFormModal';
+import emailJSApproveEmail from '../email/emailJSApproveEmail';
 
 const today = new Date();
 const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -107,10 +108,14 @@ const UserGridComponent = (props) => {
 
   const classes = useStyles();
   const handleApprove = (sid) => {
-    setUsers(users.filter((user) => user.sid !== sid));
+    setUsers(users.filter((user) => user.sid !== sid.sid));
     axios
       .put('/users/user/approve', { sid: sid, status: 'approved' })
-      .then((res) => console.log(res));
+      .then((res) =>
+        res.status === 200
+          ? emailJSApproveEmail({ name: sid.name })
+          : console.log('res.status', res.status),
+      );
   };
   return (
     <>
@@ -156,12 +161,14 @@ const UserGridComponent = (props) => {
                         style={{ margin: '10px' }}
                         variant="contained"
                         color="success"
-                        onClick={() => handleApprove(rowData.sid)}
+                        onClick={() => handleApprove(rowData)}
                       >
                         Approve
                       </Button>
                       <RejectFormModal
-                        user={{ to_name: rowData.name, mail: rowData.email, sid: rowData.sid}} setUsers={setUsers} users={users}
+                        user={{ to_name: rowData.name, mail: rowData.email, sid: rowData.sid }}
+                        setUsers={setUsers}
+                        users={users}
                       />
                     </div>
                   ),
